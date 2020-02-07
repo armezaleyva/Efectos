@@ -41,6 +41,7 @@ namespace Reproductor
         public int Read(float[] buffer, int offset, int count) {
             int read = fuente.Read(buffer, offset, count);
 
+            // Aplicar el efecto
             for (int i = 0; i < read; i++) {
                 buffer[i + offset] *= volumen;
             }
