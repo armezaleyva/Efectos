@@ -37,6 +37,7 @@ namespace Reproductor {
         //VolumeSampleProvider volume;
         EfectoVolumen efectoVolumen;
         EfectoFadeIn efectoFadeIn;
+        EfectoFadeOut efectoFadeOut;
 
         public MainWindow() {
             InitializeComponent();
@@ -91,9 +92,15 @@ namespace Reproductor {
                     //volume = new VolumeSampleProvider(reader);
                     //volume.Volume = (float)sldVolumen.Value;
 
-                    efectoFadeIn = new EfectoFadeIn(reader, 20.0f);
+                    float duracionFadeIn = float.Parse(txtDuracion.Text);
+                    efectoFadeIn = new EfectoFadeIn(reader, duracionFadeIn);
 
-                    efectoVolumen = new EfectoVolumen(efectoFadeIn);
+                    float duracionFadeOut = float.Parse(txtDuracionFadeOut.Text);
+                    float inicioFadeOut = float.Parse(txtInicio.Text);
+                    efectoFadeOut = new EfectoFadeOut(reader, duracionFadeOut, inicioFadeOut);
+
+                    var auxEfectoVolumen = new EfectoVolumen(efectoFadeOut);
+                    efectoVolumen = new EfectoVolumen(auxEfectoVolumen);
                     efectoVolumen.Volumen = (float)sldVolumen.Value;
 
                     output = new WaveOut();
