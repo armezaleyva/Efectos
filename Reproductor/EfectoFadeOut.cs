@@ -38,7 +38,6 @@ namespace Reproductor {
 
             if (segundosTranscurridos >= inicio && segundosTranscurridos <= inicio + duracion) {
                 float factorEscala = 1 - ((segundosTranscurridos - inicio) / duracion);
-                Console.WriteLine(factorEscala);
                 for (int i = 0; i < read; i++) {
                     buffer[i + offset] *= factorEscala;
                 }
